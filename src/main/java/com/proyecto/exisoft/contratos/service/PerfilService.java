@@ -18,4 +18,24 @@ public class PerfilService {
     public List<Perfil> getAllPerfil(){
         return perfilRepository.findAll();
     }
+
+    public Perfil save(Perfil newPerfil) {
+        return perfilRepository.save(newPerfil);
+    }
+
+    public void delete(Integer id) {
+        perfilRepository.delete(new Perfil(id));
+    }
+
+    public Perfil update(Perfil newPerfil, Integer id) {
+        return perfilRepository.findById(id)
+                .map(
+                        perfil -> {
+                            perfil.setPerfilNombre(newPerfil.getPerfilNombre());
+                            perfil.setPerfilValor(newPerfil.getPerfilValor());
+                            perfil.setPerfilDescripcion(newPerfil.getPerfilDescripcion());
+                            return perfilRepository.save(newPerfil);
+                        }
+                ).get();
+    }
 }

@@ -29,6 +29,10 @@ public class Perfil {
         this.profesional = profesional;
     }
 
+    public Perfil(Integer id) {
+        this.perfilId = id;
+    }
+
     public Integer getPerfilId() {
         return perfilId;
     }

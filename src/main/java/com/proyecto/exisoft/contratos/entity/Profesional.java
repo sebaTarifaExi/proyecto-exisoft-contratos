@@ -67,6 +67,8 @@ public class Profesional {
         this.seniority = seniority;
     }
 
+    public Profesional(Integer id){this.profesionalId = id;}
+
     public Integer getProfesionalId() {
         return profesionalId;
     }
