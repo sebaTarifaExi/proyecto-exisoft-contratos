@@ -26,6 +26,10 @@ public class Seniority {
         this.profesional = profesional;
     }
 
+    public Seniority(Integer id) {
+        this.seniorityId = id;
+    }
+
     public Integer getSeniorityId() {
         return seniorityId;
     }

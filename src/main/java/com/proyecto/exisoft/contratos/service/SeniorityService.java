@@ -15,5 +15,24 @@ public class SeniorityService {
         this.seniorityRepository = seniorityRepository;
     }
 
-    List<Seniority> getAllSeniority() {return seniorityRepository.findAll();}
+    public List<Seniority> getAllSeniority() {return seniorityRepository.findAll();}
+
+    public Seniority save(Seniority newSeniority) {
+        return seniorityRepository.save(newSeniority);
+    }
+
+    public void delete(Integer id) {
+        seniorityRepository.delete(new Seniority(id));
+    }
+
+    public Seniority update(Seniority newSeniority, Integer id) {
+        return seniorityRepository.findById(id)
+                .map(
+                        seniority -> {
+                            seniority.setSeniorityNombre(newSeniority.getSeniorityNombre());
+                            seniority.setSeniorityDescripcion(newSeniority.getSeniorityDescripcion());
+                            return seniorityRepository.save(newSeniority);
+                        }
+                ).get();
+    }
 }

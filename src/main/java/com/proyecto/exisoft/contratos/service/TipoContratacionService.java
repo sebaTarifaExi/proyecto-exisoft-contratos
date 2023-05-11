@@ -15,5 +15,26 @@ public class TipoContratacionService {
         this.tipoContratacionRepository = tipoContratacionRepository;
     }
 
-    List<TipoContratacion> getAllTipoContratacion(){return tipoContratacionRepository.findAll();}
+    public List<TipoContratacion> getAllTipoContratacion(){return tipoContratacionRepository.findAll();}
+
+    public TipoContratacion save(TipoContratacion newTipoContratacion) {
+        return tipoContratacionRepository.save(newTipoContratacion);
+    }
+
+    public void delete(Integer id){
+        tipoContratacionRepository.delete(new TipoContratacion(id));
+    }
+
+    public TipoContratacion update(TipoContratacion newTipoContratacion, Integer id){
+        return tipoContratacionRepository.findById(id)
+                .map(
+                        tipoContratacion->{
+                            tipoContratacion.setTipoContratacionNombre(newTipoContratacion.getTipoContratacionNombre());
+                            tipoContratacion.setTipoContratacionDescripcion(newTipoContratacion.getTipoContratacionDescripcion());
+                            return tipoContratacionRepository.save(newTipoContratacion);
+                        }
+                ).get();
+
+    }
+
 }

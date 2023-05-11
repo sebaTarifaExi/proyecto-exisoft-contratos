@@ -28,6 +28,10 @@ public class TipoContratacion {
         this.profesional = profesional;
     }
 
+    public TipoContratacion(Integer id) {
+        this.tipoContratacionId = id;
+    }
+
     public Integer getTipoContratacionId() {
         return tipoContratacionId;
     }
