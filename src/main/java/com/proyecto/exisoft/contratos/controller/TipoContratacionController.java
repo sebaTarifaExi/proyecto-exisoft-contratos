@@ -1,9 +1,6 @@
 package com.proyecto.exisoft.contratos.controller;
 
-import com.proyecto.exisoft.contratos.caseuse.tipocontratacion.CreateTipoContratacion;
-import com.proyecto.exisoft.contratos.caseuse.tipocontratacion.DeleteTipoContratacion;
-import com.proyecto.exisoft.contratos.caseuse.tipocontratacion.GetTipoContratacion;
-import com.proyecto.exisoft.contratos.caseuse.tipocontratacion.UpdateTipoContratacion;
+import com.proyecto.exisoft.contratos.caseuse.tipocontratacion.*;
 import com.proyecto.exisoft.contratos.entity.TipoContratacion;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +15,14 @@ public class TipoContratacionController {
     private CreateTipoContratacion createTipoContratacion;
     private DeleteTipoContratacion deleteTipoContratacion;
     private UpdateTipoContratacion updateTipoContratacion;
+    private FindByTcnNombre findByTcnNombre;
 
-    public TipoContratacionController(GetTipoContratacion getTipoContratacion, CreateTipoContratacion createTipoContratacion, DeleteTipoContratacion deleteTipoContratacion, UpdateTipoContratacion updateTipoContratacion) {
+    public TipoContratacionController(GetTipoContratacion getTipoContratacion, CreateTipoContratacion createTipoContratacion, DeleteTipoContratacion deleteTipoContratacion, UpdateTipoContratacion updateTipoContratacion, FindByTcnNombre findByTcnNombre) {
         this.getTipoContratacion = getTipoContratacion;
         this.createTipoContratacion = createTipoContratacion;
         this.deleteTipoContratacion = deleteTipoContratacion;
         this.updateTipoContratacion = updateTipoContratacion;
+        this.findByTcnNombre = findByTcnNombre;
     }
 
     @GetMapping("/")
@@ -40,5 +39,9 @@ public class TipoContratacionController {
     @PutMapping("/{id}")
     ResponseEntity<TipoContratacion> updateTipoContratacion(@RequestBody TipoContratacion newTipoContratacion, @PathVariable Integer id){
         return new ResponseEntity<>(updateTipoContratacion.update(newTipoContratacion,id),HttpStatus.OK);
+    }
+    @GetMapping("/{tcnNombre}")
+    ResponseEntity<List<TipoContratacion>> findByTcnNombre(@PathVariable String tcnNombre){
+        return findByTcnNombre.findByTcnNombre(tcnNombre);
     }
 }

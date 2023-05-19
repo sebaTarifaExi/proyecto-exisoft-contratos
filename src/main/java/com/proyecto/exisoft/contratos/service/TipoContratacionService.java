@@ -1,8 +1,11 @@
 package com.proyecto.exisoft.contratos.service;
 
+import com.proyecto.exisoft.contratos.entity.Perfil;
 import com.proyecto.exisoft.contratos.entity.Seniority;
 import com.proyecto.exisoft.contratos.entity.TipoContratacion;
 import com.proyecto.exisoft.contratos.repository.TipoContratacionRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,5 +37,14 @@ public class TipoContratacionService {
                             return tipoContratacionRepository.save(tipoContratacion);
                         }
                 ).get();
+    }
+
+    public ResponseEntity<List<TipoContratacion>> findByTcnNombre(String nombre){
+        List<TipoContratacion> listaDeContracionesBuscadasPorNombre = tipoContratacionRepository.findByTcnNombre(nombre);
+        if(listaDeContracionesBuscadasPorNombre.isEmpty()){
+            return new ResponseEntity<List<TipoContratacion>>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<List<TipoContratacion>>(listaDeContracionesBuscadasPorNombre,HttpStatus.OK);
+        }
     }
 }

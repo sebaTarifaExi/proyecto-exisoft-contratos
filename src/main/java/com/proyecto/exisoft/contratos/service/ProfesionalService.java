@@ -10,8 +10,11 @@ import com.proyecto.exisoft.contratos.repository.SeniorityRepository;
 import com.proyecto.exisoft.contratos.repository.TipoContratacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -81,6 +84,15 @@ public class ProfesionalService {
                             return profesionalRepository.save(profesional);
                         }
                 ).get();
+    }
+
+    public ResponseEntity<List<Profesional>> findByPalFechaDeIngresoBetween(LocalDate begin, LocalDate end){
+        List<Profesional> listaDeProfesionalesBuscadosPorFechasDeIngreso = profesionalRepository.findByPalFechaIngresoBetween(begin, end);
+        if(listaDeProfesionalesBuscadosPorFechasDeIngreso.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else{
+            return new ResponseEntity<>(listaDeProfesionalesBuscadosPorFechasDeIngreso, HttpStatus.OK);
+        }
     }
 
 }

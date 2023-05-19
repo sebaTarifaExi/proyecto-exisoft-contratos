@@ -1,15 +1,13 @@
 package com.proyecto.exisoft.contratos.controller;
 
-import com.proyecto.exisoft.contratos.caseuse.profesional.CreateProfesional;
-import com.proyecto.exisoft.contratos.caseuse.profesional.DeleteProfesional;
-import com.proyecto.exisoft.contratos.caseuse.profesional.GetProfesional;
-import com.proyecto.exisoft.contratos.caseuse.profesional.UpdateProfesional;
+import com.proyecto.exisoft.contratos.caseuse.profesional.*;
 import com.proyecto.exisoft.contratos.entity.Profesional;
 import com.proyecto.exisoft.contratos.entity.Seniority;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -19,12 +17,14 @@ public class ProfesionalController {
     private CreateProfesional createProfesional;
     private DeleteProfesional deleteProfesional;
     private UpdateProfesional updateProfesional;
+    private FindByPalFechaDeIngresoBetween findByPalFechaDeIngresoBetween;
 
-    public ProfesionalController(GetProfesional getProfesional, CreateProfesional createProfesional, DeleteProfesional deleteProfesional, UpdateProfesional updateProfesional) {
+    public ProfesionalController(GetProfesional getProfesional, CreateProfesional createProfesional, DeleteProfesional deleteProfesional, UpdateProfesional updateProfesional, FindByPalFechaDeIngresoBetween findByPalFechaDeIngresoBetween) {
         this.getProfesional = getProfesional;
         this.createProfesional = createProfesional;
         this.deleteProfesional = deleteProfesional;
         this.updateProfesional = updateProfesional;
+        this.findByPalFechaDeIngresoBetween = findByPalFechaDeIngresoBetween;
     }
 
     @GetMapping("/")
@@ -41,5 +41,9 @@ public class ProfesionalController {
     @PutMapping("/{id}")
     ResponseEntity<Profesional> updateProfesional(@RequestBody Profesional newProfesional, @PathVariable Integer id){
         return new ResponseEntity<>(updateProfesional.update(newProfesional,id),HttpStatus.OK);
+    }
+    @GetMapping("/{begin}-{end}")
+    ResponseEntity<List<Profesional>> findByPalFechaDeIngresoBetween(LocalDate begin, LocalDate end){
+        return findByPalFechaDeIngresoBetween(begin, end);
     }
 }
