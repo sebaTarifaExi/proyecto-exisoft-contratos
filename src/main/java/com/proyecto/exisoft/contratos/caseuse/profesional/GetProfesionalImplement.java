@@ -2,6 +2,7 @@ package com.proyecto.exisoft.contratos.caseuse.profesional;
 
 import com.proyecto.exisoft.contratos.entity.Profesional;
 import com.proyecto.exisoft.contratos.service.ProfesionalService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

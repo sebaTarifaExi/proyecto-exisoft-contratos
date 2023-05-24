@@ -2,8 +2,10 @@ package com.proyecto.exisoft.contratos.controller;
 
 import com.proyecto.exisoft.contratos.caseuse.tipocontratacion.*;
 import com.proyecto.exisoft.contratos.entity.TipoContratacion;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,7 +43,8 @@ public class TipoContratacionController {
         return new ResponseEntity<>(updateTipoContratacion.update(newTipoContratacion,id),HttpStatus.OK);
     }
     @GetMapping("/{tcnNombre}")
-    ResponseEntity<List<TipoContratacion>> findByTcnNombre(@PathVariable String tcnNombre){
+    ResponseEntity<List<TipoContratacion>> findByTcnNombre(Model modelo, @Param("tcnNombre") String tcnNombre){
+        modelo.addAttribute("tcnNombre", tcnNombre);
         return findByTcnNombre.findByTcnNombre(tcnNombre);
     }
 }

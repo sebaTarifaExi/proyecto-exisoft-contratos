@@ -9,6 +9,7 @@ import com.proyecto.exisoft.contratos.repository.ProfesionalRepository;
 import com.proyecto.exisoft.contratos.repository.SeniorityRepository;
 import com.proyecto.exisoft.contratos.repository.TipoContratacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class ProfesionalService {
     @Autowired
     private PerfilRepository perfilRepository;
     @Autowired
-    private TipoContratacionRepository tipoContraciconRepository;
+    private TipoContratacionRepository tipoContratacionRepository;
     @Autowired
     private SeniorityRepository seniorityRepository;
 
@@ -31,6 +32,22 @@ public class ProfesionalService {
         this.profesionalRepository = profesionalRepository;
     }
     public List<Profesional> getAllProfesional(){
+        Profesional newProfesional = new Profesional();
+
+        Perfil perfil = this.perfilRepository.findById(newProfesional.getPalPil().getId())
+                .orElseThrow(() -> new IllegalArgumentException("El perfil no existe"));
+        newProfesional.setPalPil(perfil);
+
+        TipoContratacion tipoContratacion = this.tipoContratacionRepository.findById(newProfesional.getPalTcn().getId())
+                .orElseThrow(() -> new IllegalArgumentException("El tipo de contratacion no existe"));
+        newProfesional.setPalTcn(tipoContratacion);
+
+        Seniority seniority = this.seniorityRepository.findById(newProfesional.getPalSty().getId())
+                .orElseThrow(()->new IllegalArgumentException(("El seniority no existe")));
+        newProfesional.setPalSty(seniority);
+
+        profesionalRepository.save(newProfesional);
+
         return profesionalRepository.findAll();
     }
 
@@ -39,7 +56,7 @@ public class ProfesionalService {
                 .orElseThrow(() -> new IllegalArgumentException("El perfil no existe"));
         newProfesional.setPalPil(perfil);
 
-        TipoContratacion tipoContratacion = this.tipoContraciconRepository.findById(newProfesional.getPalTcn().getId())
+        TipoContratacion tipoContratacion = this.tipoContratacionRepository.findById(newProfesional.getPalTcn().getId())
                 .orElseThrow(() -> new IllegalArgumentException("El tipo de contratacion no existe"));
         newProfesional.setPalTcn(tipoContratacion);
 
@@ -57,7 +74,7 @@ public class ProfesionalService {
     public Profesional update(Profesional newProfesional, Integer id) {
         Perfil perfil = this.perfilRepository.findById(newProfesional.getPalPil().getId())
                 .orElseThrow(() -> new IllegalArgumentException("El perfil no existe"));
-        TipoContratacion tipoContratacion = this.tipoContraciconRepository.findById(newProfesional.getPalTcn().getId())
+        TipoContratacion tipoContratacion = this.tipoContratacionRepository.findById(newProfesional.getPalTcn().getId())
                 .orElseThrow(() -> new IllegalArgumentException("El tipo de contratacion no existe"));
         Seniority seniority = this.seniorityRepository.findById(newProfesional.getPalSty().getId())
                 .orElseThrow(()->new IllegalArgumentException(("El seniority no existe")));

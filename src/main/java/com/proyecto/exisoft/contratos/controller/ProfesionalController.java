@@ -3,6 +3,8 @@ package com.proyecto.exisoft.contratos.controller;
 import com.proyecto.exisoft.contratos.caseuse.profesional.*;
 import com.proyecto.exisoft.contratos.entity.Profesional;
 import com.proyecto.exisoft.contratos.entity.Seniority;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +30,9 @@ public class ProfesionalController {
     }
 
     @GetMapping("/")
-    List<Profesional> get(){return getProfesional.getAll();}
+    public ResponseEntity<List<Profesional>> getAllProfesionals(){
+        return new ResponseEntity<>(getProfesional.getAll(), HttpStatus.OK);
+    }
     @PostMapping("/")
     ResponseEntity<Profesional> newProfesional (@RequestBody Profesional newProfesional){
         return new ResponseEntity<>(createProfesional.create(newProfesional), HttpStatus.CREATED);
@@ -42,8 +46,8 @@ public class ProfesionalController {
     ResponseEntity<Profesional> updateProfesional(@RequestBody Profesional newProfesional, @PathVariable Integer id){
         return new ResponseEntity<>(updateProfesional.update(newProfesional,id),HttpStatus.OK);
     }
-    @GetMapping("/{begin}-{end}")
-    ResponseEntity<List<Profesional>> findByPalFechaDeIngresoBetween(LocalDate begin, LocalDate end){
-        return findByPalFechaDeIngresoBetween(begin, end);
+    @GetMapping("/{PalFechaDeIngresoBegin}/{PalFechaDeIngresoEnd}")
+    ResponseEntity<List<Profesional>> findByPalFechaDeIngresoBetween(@PathVariable LocalDate PalFechaDeIngresoBegin, @PathVariable LocalDate PalFechaDeIngresoEnd){
+        return findByPalFechaDeIngresoBetween.findByPalFechaDeIngresoBetween(PalFechaDeIngresoBegin, PalFechaDeIngresoEnd);
     }
 }

@@ -9,10 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface TipoContratacionRepository extends JpaRepository<TipoContratacion, Integer> {
-   /* @Query("select tcn.tcn_nombre\n" +
-            "from TIPO_CONTRATACION tcn\n" +
-            "where tcn.tcn_nombre\n" +
-            "like '%nombre%'")*/
+   // @Query("SELECT T From TIPO_CONTRATACION T WHERE"+
+   // " CONCAT(T.tcn_id, T.tcn_nombre, T.tcn_descripcion)"+
+    //" LIKE %?1%")
     List<TipoContratacion> findByTcnNombre(String nombre);
     List<TipoContratacion> findByTcnDescripcion(String descripcion);
 }

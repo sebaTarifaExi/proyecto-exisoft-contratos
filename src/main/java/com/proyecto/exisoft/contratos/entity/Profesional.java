@@ -3,6 +3,7 @@ package com.proyecto.exisoft.contratos.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -50,6 +51,7 @@ public class Profesional {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "pal_pil_id", nullable = false)
+    @JsonManagedReference
     private Perfil palPil;
 
     @Column(name = "pal_cuit", length = 13)
@@ -60,10 +62,12 @@ public class Profesional {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pal_tcn_id", insertable=false, updatable=false)
+    @JsonManagedReference
     private TipoContratacion palTcn;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pal_sty_id", insertable=false, updatable=false)
+    @JsonManagedReference
     private Seniority palSty;
 
     public Profesional() {
@@ -210,8 +214,5 @@ public class Profesional {
         this.palSty = palSty;
     }
 
-   // public void agregarPerfil(Perfil perfil){
-
-   // }
 
 }
