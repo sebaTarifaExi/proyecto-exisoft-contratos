@@ -32,22 +32,6 @@ public class ProfesionalService {
         this.profesionalRepository = profesionalRepository;
     }
     public List<Profesional> getAllProfesional(){
-        Profesional newProfesional = new Profesional();
-
-        Perfil perfil = this.perfilRepository.findById(newProfesional.getPalPil().getId())
-                .orElseThrow(() -> new IllegalArgumentException("El perfil no existe"));
-        newProfesional.setPalPil(perfil);
-
-        TipoContratacion tipoContratacion = this.tipoContratacionRepository.findById(newProfesional.getPalTcn().getId())
-                .orElseThrow(() -> new IllegalArgumentException("El tipo de contratacion no existe"));
-        newProfesional.setPalTcn(tipoContratacion);
-
-        Seniority seniority = this.seniorityRepository.findById(newProfesional.getPalSty().getId())
-                .orElseThrow(()->new IllegalArgumentException(("El seniority no existe")));
-        newProfesional.setPalSty(seniority);
-
-        profesionalRepository.save(newProfesional);
-
         return profesionalRepository.findAll();
     }
 

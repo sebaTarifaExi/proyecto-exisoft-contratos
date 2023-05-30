@@ -15,7 +15,7 @@ public class FindByTcnNombre {
         this.tipoContratacionService = tipoContratacionService;
     }
 
-    public ResponseEntity<List<TipoContratacion>> findByTcnNombre(String tcnNombre){
-        return tipoContratacionService.findByTcnNombre(tcnNombre);
+    public ResponseEntity<List<TipoContratacion>> findByTcnNombreContainingIgnoreCase(String tcnNombre){
+        return tipoContratacionService.findByTcnNombreContainingIgnoreCase(tcnNombre);
     }
 }

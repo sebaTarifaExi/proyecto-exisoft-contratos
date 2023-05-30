@@ -39,8 +39,8 @@ public class TipoContratacionService {
                 ).get();
     }
 
-    public ResponseEntity<List<TipoContratacion>> findByTcnNombre(String nombre){
-        List<TipoContratacion> listaDeContracionesBuscadasPorNombre = tipoContratacionRepository.findByTcnNombre(nombre);
+    public ResponseEntity<List<TipoContratacion>> findByTcnNombreContainingIgnoreCase(String nombre){
+        List<TipoContratacion> listaDeContracionesBuscadasPorNombre = tipoContratacionRepository.findByTcnNombreContainingIgnoreCase(nombre);
         if(listaDeContracionesBuscadasPorNombre.isEmpty()){
             return new ResponseEntity<List<TipoContratacion>>(HttpStatus.NO_CONTENT);
         } else {

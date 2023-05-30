@@ -33,7 +33,7 @@ public class PerfilService {
                 .map(
                         perfil -> {
                             perfil.setPilNombre(newPerfil.getPilNombre());
-                            perfil.setPilValor(newPerfil.getPilValor());
+                           // perfil.setPilValor(newPerfil.getPilValor());
                             perfil.setPilDescripcion(newPerfil.getPilDescripcion());
                             return perfilRepository.save(perfil);
                         }

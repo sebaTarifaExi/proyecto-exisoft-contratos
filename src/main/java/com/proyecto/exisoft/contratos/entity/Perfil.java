@@ -15,8 +15,8 @@ public class Perfil {
     @Column(name = "pil_nombre", nullable = false, length = 25)
     private String pilNombre;
 
-    @Column(name = "pil_valor")
-    private Double pilValor;
+  //  @Column(name = "pil_valor")
+  //  private Double pilValor;
 
     @Lob
     @Column(name = "pil_descripcion")
@@ -29,9 +29,9 @@ public class Perfil {
         this.id = id;
     }
 
-    public Perfil(String pilNombre, Double pilValor, String pilDescripcion) {
+    public Perfil(String pilNombre /*Double pilValor*/, String pilDescripcion) {
         this.pilNombre = pilNombre;
-        this.pilValor = pilValor;
+        //this.pilValor = pilValor;
         this.pilDescripcion = pilDescripcion;
     }
 
@@ -51,13 +51,13 @@ public class Perfil {
         this.pilNombre = pilNombre;
     }
 
-    public Double getPilValor() {
+   /* public Double getPilValor() {
         return pilValor;
-    }
+    }*/
 
-    public void setPilValor(Double pilValor) {
-        this.pilValor = pilValor;
-    }
+//    public void setPilValor(Double pilValor) {
+//        this.pilValor = pilValor;
+//    }
 
     public String getPilDescripcion() {
         return pilDescripcion;

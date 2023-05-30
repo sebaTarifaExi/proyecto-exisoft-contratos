@@ -12,6 +12,6 @@ public interface TipoContratacionRepository extends JpaRepository<TipoContrataci
    // @Query("SELECT T From TIPO_CONTRATACION T WHERE"+
    // " CONCAT(T.tcn_id, T.tcn_nombre, T.tcn_descripcion)"+
     //" LIKE %?1%")
-    List<TipoContratacion> findByTcnNombre(String nombre);
+    List<TipoContratacion> findByTcnNombreContainingIgnoreCase(String nombre);
     List<TipoContratacion> findByTcnDescripcion(String descripcion);
 }

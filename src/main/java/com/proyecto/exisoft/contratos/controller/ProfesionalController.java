@@ -5,6 +5,7 @@ import com.proyecto.exisoft.contratos.entity.Profesional;
 import com.proyecto.exisoft.contratos.entity.Seniority;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,8 +47,11 @@ public class ProfesionalController {
     ResponseEntity<Profesional> updateProfesional(@RequestBody Profesional newProfesional, @PathVariable Integer id){
         return new ResponseEntity<>(updateProfesional.update(newProfesional,id),HttpStatus.OK);
     }
-    @GetMapping("/{PalFechaDeIngresoBegin}/{PalFechaDeIngresoEnd}")
-    ResponseEntity<List<Profesional>> findByPalFechaDeIngresoBetween(@PathVariable LocalDate PalFechaDeIngresoBegin, @PathVariable LocalDate PalFechaDeIngresoEnd){
-        return findByPalFechaDeIngresoBetween.findByPalFechaDeIngresoBetween(PalFechaDeIngresoBegin, PalFechaDeIngresoEnd);
+    @GetMapping
+    ResponseEntity<List<Profesional>> findByPalFechaDeIngresoBetween(
+            @RequestParam("begin") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
+            @RequestParam("end") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end){
+
+        return findByPalFechaDeIngresoBetween.findByPalFechaDeIngresoBetween(begin, end);
     }
 }

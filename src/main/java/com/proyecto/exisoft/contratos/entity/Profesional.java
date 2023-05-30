@@ -49,7 +49,7 @@ public class Profesional {
     @Column(name = "pal_fecha_renuncia")
     private LocalDate palFechaRenuncia;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "pal_pil_id", nullable = false)
     @JsonManagedReference
     private Perfil palPil;
@@ -60,12 +60,12 @@ public class Profesional {
     @Column(name = "pal_legajo", length = 10)
     private String palLegajo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pal_tcn_id", insertable=false, updatable=false)
     @JsonManagedReference
     private TipoContratacion palTcn;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pal_sty_id", insertable=false, updatable=false)
     @JsonManagedReference
     private Seniority palSty;

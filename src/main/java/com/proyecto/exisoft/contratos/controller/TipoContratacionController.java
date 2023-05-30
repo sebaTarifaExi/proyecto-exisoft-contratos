@@ -43,8 +43,7 @@ public class TipoContratacionController {
         return new ResponseEntity<>(updateTipoContratacion.update(newTipoContratacion,id),HttpStatus.OK);
     }
     @GetMapping("/{tcnNombre}")
-    ResponseEntity<List<TipoContratacion>> findByTcnNombre(Model modelo, @Param("tcnNombre") String tcnNombre){
-        modelo.addAttribute("tcnNombre", tcnNombre);
-        return findByTcnNombre.findByTcnNombre(tcnNombre);
+    ResponseEntity<List<TipoContratacion>> findByTcnNombre(@PathVariable String tcnNombre){
+        return findByTcnNombre.findByTcnNombreContainingIgnoreCase(tcnNombre);
     }
 }
