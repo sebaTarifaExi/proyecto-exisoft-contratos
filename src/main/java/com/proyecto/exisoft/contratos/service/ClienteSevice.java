@@ -39,11 +39,11 @@ public class ClienteSevice {
     }
 
     public ResponseEntity<List<Cliente>> findByCteNombreContainingIgnoreCase (String nombre){
-        List<Cliente> listaDePerfilesClientesPorNombre = clienteRepository.findByCteNombreContainingIgnoreCase(nombre);
-        if(listaDePerfilesClientesPorNombre.isEmpty()){
+        List<Cliente> listaDeClientesPorNombre = clienteRepository.findByCteNombreContainingIgnoreCase(nombre);
+        if(listaDeClientesPorNombre.isEmpty()){
             return new ResponseEntity<List<Cliente>>(HttpStatus.NO_CONTENT);
         } else {
-            return new ResponseEntity<List<Cliente>>(listaDePerfilesClientesPorNombre,HttpStatus.OK);
+            return new ResponseEntity<List<Cliente>>(listaDeClientesPorNombre,HttpStatus.OK);
         }
     }
 }
