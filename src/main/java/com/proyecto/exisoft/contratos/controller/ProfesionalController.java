@@ -20,8 +20,8 @@ public class ProfesionalController {
     private UpdateProfesional updateProfesional;
     private FindByPalFechaDeIngresoBetween findByPalFechaDeIngresoBetween;
     private FindByPalNombre findByPalNombre;
-    /*@Autowired
-    private FindByPalMail findByPalMail;*/
+    @Autowired
+    private FindByPalMail findByPalMail;
 
     public ProfesionalController(GetProfesional getProfesional, CreateProfesional createProfesional, DeleteProfesional deleteProfesional, UpdateProfesional updateProfesional, FindByPalFechaDeIngresoBetween findByPalFechaDeIngresoBetween, FindByPalNombre findByPalNombre) {
         this.getProfesional = getProfesional;
@@ -57,13 +57,13 @@ public class ProfesionalController {
         return findByPalFechaDeIngresoBetween.findByPalFechaDeIngresoBetween(begin, end);
     }
 
-    @GetMapping("/{nombre}")
+    @GetMapping("/porNombre/{nombre}")
     ResponseEntity<List<Profesional>> findByPalNombre (@PathVariable String nombre){
         return  findByPalNombre.findByPalNombre(nombre);
     }
 
-   /* @GetMapping("/{mail}")
+    @GetMapping("/porMail/{mail}")
     ResponseEntity<List<Profesional>> findByPalMail (@PathVariable String mail){
         return  findByPalMail.findByPalMail(mail);
-    }*/
+    }
 }

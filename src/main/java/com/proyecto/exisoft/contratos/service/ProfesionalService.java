@@ -105,13 +105,13 @@ public class ProfesionalService {
         }
     }
 
-   /* public ResponseEntity<List<Profesional>> findByPalMailContainingIgnoreCase(String mail){
+   public ResponseEntity<List<Profesional>> findByPalMailContainingIgnoreCase(String mail){
         List<Profesional> listaDeProfesionalesBuscadosPorMail = profesionalRepository.findByPalMailContainingIgnoreCase(mail);
         if(listaDeProfesionalesBuscadosPorMail.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }else{
             return new ResponseEntity<>(listaDeProfesionalesBuscadosPorMail, HttpStatus.OK);
         }
-    }*/
+    }
 
 }
