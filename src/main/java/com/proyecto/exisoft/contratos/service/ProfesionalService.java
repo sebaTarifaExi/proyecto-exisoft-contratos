@@ -96,4 +96,22 @@ public class ProfesionalService {
         }
     }
 
+    public ResponseEntity<List<Profesional>> findByPalNombreContainingIgnoreCase(String nombre){
+        List<Profesional> listaDeProfesionalesBuscadosPorNombre = profesionalRepository.findByPalNombreContainingIgnoreCase(nombre);
+        if(listaDeProfesionalesBuscadosPorNombre.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else{
+            return new ResponseEntity<>(listaDeProfesionalesBuscadosPorNombre, HttpStatus.OK);
+        }
+    }
+
+   /* public ResponseEntity<List<Profesional>> findByPalMailContainingIgnoreCase(String mail){
+        List<Profesional> listaDeProfesionalesBuscadosPorMail = profesionalRepository.findByPalMailContainingIgnoreCase(mail);
+        if(listaDeProfesionalesBuscadosPorMail.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else{
+            return new ResponseEntity<>(listaDeProfesionalesBuscadosPorMail, HttpStatus.OK);
+        }
+    }*/
+
 }

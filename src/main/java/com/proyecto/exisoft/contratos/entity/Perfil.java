@@ -1,5 +1,7 @@
 package com.proyecto.exisoft.contratos.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,10 @@ public class Perfil {
     @Lob
     @Column(name = "pil_descripcion")
     private String pilDescripcion;
+
+
+    /*@OneToMany(mappedBy = "palPil", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Profesional> profesionals = new ArrayList<>();*/
 
     public Perfil() {
     }

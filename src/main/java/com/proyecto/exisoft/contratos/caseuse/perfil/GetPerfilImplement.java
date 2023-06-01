@@ -2,6 +2,7 @@ package com.proyecto.exisoft.contratos.caseuse.perfil;
 
 import com.proyecto.exisoft.contratos.entity.Perfil;
 import com.proyecto.exisoft.contratos.service.PerfilService;
+import com.proyecto.exisoft.contratos.service.ProfesionalService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

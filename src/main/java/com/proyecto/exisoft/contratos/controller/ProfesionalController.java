@@ -2,9 +2,7 @@ package com.proyecto.exisoft.contratos.controller;
 
 import com.proyecto.exisoft.contratos.caseuse.profesional.*;
 import com.proyecto.exisoft.contratos.entity.Profesional;
-import com.proyecto.exisoft.contratos.entity.Seniority;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +19,17 @@ public class ProfesionalController {
     private DeleteProfesional deleteProfesional;
     private UpdateProfesional updateProfesional;
     private FindByPalFechaDeIngresoBetween findByPalFechaDeIngresoBetween;
+    private FindByPalNombre findByPalNombre;
+    /*@Autowired
+    private FindByPalMail findByPalMail;*/
 
-    public ProfesionalController(GetProfesional getProfesional, CreateProfesional createProfesional, DeleteProfesional deleteProfesional, UpdateProfesional updateProfesional, FindByPalFechaDeIngresoBetween findByPalFechaDeIngresoBetween) {
+    public ProfesionalController(GetProfesional getProfesional, CreateProfesional createProfesional, DeleteProfesional deleteProfesional, UpdateProfesional updateProfesional, FindByPalFechaDeIngresoBetween findByPalFechaDeIngresoBetween, FindByPalNombre findByPalNombre) {
         this.getProfesional = getProfesional;
         this.createProfesional = createProfesional;
         this.deleteProfesional = deleteProfesional;
         this.updateProfesional = updateProfesional;
         this.findByPalFechaDeIngresoBetween = findByPalFechaDeIngresoBetween;
+        this.findByPalNombre = findByPalNombre;
     }
 
     @GetMapping("/")
@@ -54,4 +56,14 @@ public class ProfesionalController {
 
         return findByPalFechaDeIngresoBetween.findByPalFechaDeIngresoBetween(begin, end);
     }
+
+    @GetMapping("/{nombre}")
+    ResponseEntity<List<Profesional>> findByPalNombre (@PathVariable String nombre){
+        return  findByPalNombre.findByPalNombre(nombre);
+    }
+
+   /* @GetMapping("/{mail}")
+    ResponseEntity<List<Profesional>> findByPalMail (@PathVariable String mail){
+        return  findByPalMail.findByPalMail(mail);
+    }*/
 }
